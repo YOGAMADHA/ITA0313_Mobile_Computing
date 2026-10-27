@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife - Fitness and Wellness</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>FitLife</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#blog">Fitness Blog</a>
+        <a href="#diet">Diet Planner</a>
+        <a href="#videos">Videos</a>
+        <a href="#subscription">Subscription</a>
+        <button onclick="showLogin()">Login</button>
+        <button onclick="showRegister()">Register</button>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <h2>Transform Your Life with FitLife</h2>
+    <p>Your daily guide to fitness, healthy food and wellness.</p>
+    <button onclick="document.getElementById('blog').scrollIntoView()">
+        Explore Fitness
+    </button>
+</section>
+
+<section id="blog">
+    <h2>Fitness Blog</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Morning Workout</h3>
+            <p>Start your day with 20 minutes of stretching and exercise.</p>
+        </div>
+        <div class="card">
+            <h3>Stay Hydrated</h3>
+            <p>Drink water regularly throughout the day.</p>
+        </div>
+        <div class="card">
+            <h3>Healthy Sleep</h3>
+            <p>Maintain a regular sleep routine for better recovery.</p>
+        </div>
+    </div>
+</section>
+
+<section id="diet">
+    <h2>Daily Diet Planner</h2>
+    <div class="card">
+        <label for="goal">Choose your goal:</label>
+        <select id="goal">
+            <option value="general">Healthy Lifestyle</option>
+            <option value="muscle">Muscle Building</option>
+            <option value="energy">More Energy</option>
+        </select>
+        <button onclick="generateDiet()">Generate Diet Plan</button>
+        <div id="dietResult"></div>
+    </div>
+</section>
+
+<section id="videos">
+    <h2>Fitness Videos</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Beginner Workout</h3>
+            <a href="https://www.youtube.com/results?search_query=beginner+workout"
+               target="_blank" rel="noopener">Watch Videos</a>
+        </div>
+        <div class="card">
+            <h3>Yoga and Stretching</h3>
+            <a href="https://www.youtube.com/results?search_query=yoga+stretching"
+               target="_blank" rel="noopener">Watch Videos</a>
+        </div>
+        <div class="card">
+            <h3>Home Fitness</h3>
+            <a href="https://www.youtube.com/results?search_query=home+workout"
+               target="_blank" rel="noopener">Watch Videos</a>
+        </div>
+    </div>
+</section>
+
+<section id="subscription">
+    <h2>Payment and Subscription</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Free Plan</h3>
+            <p>Access fitness blogs and basic tips.</p>
+            <h2>₹0</h2>
+            <button onclick="subscribe('Free Plan')">Choose Plan</button>
+        </div>
+        <div class="card">
+            <h3>Premium Plan</h3>
+            <p>Access premium fitness content and routines.</p>
+            <h2>₹199/month</h2>
+            <button onclick="subscribe('Premium Plan')">Subscribe</button>
+        </div>
+    </div>
+    <p id="subscriptionResult"></p>
+    <p class="note">Demo only: real payments require a secure payment gateway.</p>
+</section>
+
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <button class="close" onclick="closeModal()">Close</button>
+        <h2 id="authTitle">Login</h2>
+        <form onsubmit="handleAuth(event)">
+            <input type="text" id="username" placeholder="Your name"
+                   autocomplete="name" required>
+            <input type="email" id="email" placeholder="Email address"
+                   autocomplete="email" required>
+            <input type="password" id="password" placeholder="Password"
+                   autocomplete="current-password" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="authMessage"></p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 FitLife | Your Fitness, Your Future</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

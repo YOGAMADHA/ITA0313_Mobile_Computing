@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Health & Self-Care</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a class="logo" href="#" onclick="showPage('home')">🌿 MindCare</a>
+    <nav>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('health')">Health Routines</a>
+        <a href="#" onclick="showPage('selfcare')">Self-Care</a>
+        <a href="#" id="authLink" onclick="showPage('login')">Login</a>
+    </nav>
+</header>
+
+<main>
+    <!-- HOME PAGE -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="hero-text">
+                <span class="tag">YOUR WELLBEING MATTERS</span>
+                <h1>Take a breath.<br>Find your balance.</h1>
+                <p>
+                    Small moments of self-care can create a healthier,
+                    calmer and happier you.
+                </p>
+                <button onclick="showPage('health')">Explore Routines</button>
+                <button class="secondary" onclick="showPage('selfcare')">
+                    Discover Self-Care
+                </button>
+            </div>
+            <div class="hero-art">
+                <div class="sun">☀️</div>
+                <div class="plant">🌿</div>
+                <div class="meditation">🧘</div>
+                <p>Breathe in peace, breathe out stress.</p>
+            </div>
+        </div>
+
+        <div class="welcome">
+            <h2 id="welcomeTitle">Welcome to your wellness space 💚</h2>
+            <p>Make time for yourself. You deserve it.</p>
+        </div>
+
+        <h2 class="section-title">Your Daily Wellness</h2>
+        <div class="features">
+            <div class="feature">
+                <span>🧘</span>
+                <h3>Mindful Meditation</h3>
+                <p>Pause, breathe and reconnect with yourself.</p>
+                <button onclick="startBreathing()">Start Session</button>
+            </div>
+            <div class="feature">
+                <span>💧</span>
+                <h3>Healthy Habits</h3>
+                <p>Build a gentle routine for a healthier life.</p>
+                <button onclick="showPage('health')">View Routines</button>
+            </div>
+            <div class="feature">
+                <span>💗</span>
+                <h3>Self-Love</h3>
+                <p>Give yourself the same care you give others.</p>
+                <button onclick="showPage('selfcare')">Read Tips</button>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Almost everything will work again if you unplug it
+            for a few minutes, including you."
+        </div>
+    </section>
+
+    <!-- LOGIN PAGE -->
+    <section id="login" class="page">
+        <div class="auth-card">
+            <div class="auth-icon">🌱</div>
+            <h2>Welcome Back</h2>
+            <p>Continue your journey to a healthier you.</p>
+
+            <form id="loginForm">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail"
+                       placeholder="you@example.com" required>
+
+                <label>Password</label>
+                <input type="password" id="loginPassword"
+                       placeholder="Enter your password"
+                       minlength="6" required>
+
+                <button type="submit" class="full-button">Login</button>
+            </form>
+
+            <p class="auth-bottom">
+                Don't have an account?
+                <a href="#" onclick="showPage('register')">Register</a>
+            </p>
+            <p id="loginMessage" class="message"></p>
+        </div>
+    </section>
+
+    <!-- REGISTER PAGE -->
+    <section id="register" class="page">
+        <div class="auth-card">
+            <div class="auth-icon">🌼</div>
+            <h2>Create Your Account</h2>
+            <p>Start putting your wellbeing first.</p>
+
+            <form id="registerForm">
+                <label>Full Name</label>
+                <input type="text" id="regName"
+                       placeholder="Enter your name" required>
+
+                <label>Email Address</label>
+                <input type="email" id="regEmail"
+                       placeholder="you@example.com" required>
+
+                <label>Password</label>
+                <input type="password" id="regPassword"
+                       placeholder="At least 6 characters"
+                       minlength="6" required>
+
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword"
+                       placeholder="Re-enter password" required>
+
+                <button type="submit" class="full-button">
+                    Create Account
+                </button>
+            </form>
+
+            <p class="auth-bottom">
+                Already registered?
+                <a href="#" onclick="showPage('login')">Login</a>
+            </p>
+            <p id="registerMessage" class="message"></p>
+        </div>
+    </section>
+
+    <!-- HEALTH ROUTINE BLOGS -->
+    <section id="health" class="page">
+        <div class="page-heading">
+            <span class="tag">HEALTHY BODY, CALM MIND</span>
+            <h1>Health Routine Blogs</h1>
+            <p>Simple habits to support your everyday wellbeing.</p>
+        </div>
+
+        <div class="filters">
+            <input type="search" id="healthSearch"
+                   placeholder="Search health routines..."
+                   oninput="renderBlogs('health')">
+            <button onclick="filterBlogs('health','All')">All</button>
+            <button onclick="filterBlogs('health','Meditation')">
+                Meditation
+            </button>
+            <button onclick="filterBlogs('health','Fitness')">Fitness</button>
+            <button onclick="filterBlogs('health','Sleep')">Sleep</button>
+        </div>
+
+        <div id="healthBlogs" class="blog-grid"></div>
+    </section>
+
+    <!-- SELF-CARE BLOGS -->
+    <section id="selfcare" class="page">
+        <div class="page-heading">
+            <span class="tag">BE KIND TO YOURSELF</span>
+            <h1>Self-Care Blogs</h1>
+            <p>Discover ways to relax, recharge and feel more balanced.</p>
+        </div>
+
+        <div class="filters">
+            <input type="search" id="selfSearch"
+                   placeholder="Search self-care tips..."
+                   oninput="renderBlogs('selfcare')">
+            <button onclick="filterBlogs('selfcare','All')">All</button>
+            <button onclick="filterBlogs('selfcare','Mindfulness')">
+                Mindfulness
+            </button>
+            <button onclick="filterBlogs('selfcare','Lifestyle')">
+                Lifestyle
+            </button>
+        </div>
+
+        <div id="selfcareBlogs" class="blog-grid"></div>
+    </section>
+
+    <!-- BLOG DETAILS -->
+    <section id="blogDetail" class="page">
+        <div class="detail-card">
+            <button class="back-button" onclick="goBack()">← Back to blogs</button>
+            <div id="blogContent"></div>
+        </div>
+    </section>
+
+    <!-- BREATHING EXERCISE -->
+    <section id="breathing" class="page">
+        <div class="breathing-card">
+            <span class="tag">MINDFUL MOMENT</span>
+            <h1>Let's Breathe Together</h1>
+            <p>Follow the circle. Relax your shoulders and breathe gently.</p>
+
+            <div class="breath-circle" id="breathCircle">
+                <span id="breathText">Ready?</span>
+            </div>
+
+            <h3 id="breathTimer">60 seconds</h3>
+            <p id="breathStatus">Find a comfortable position.</p>
+            <button onclick="startBreathing()" id="breathButton">
+                Start Breathing
+            </button>
+            <button class="secondary" onclick="stopBreathing()">Stop</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <h3>🌿 MindCare</h3>
+    <p>Your wellbeing journey starts with one small step.</p>
+    <p>© 2026 MindCare. Take care of yourself.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

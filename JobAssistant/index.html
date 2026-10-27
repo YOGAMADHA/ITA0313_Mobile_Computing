@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerPilot - Intelligent Job Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="#" class="logo" onclick="showPage('dashboard')">
+        <span>✦</span> CareerPilot
+    </a>
+
+    <nav>
+        <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+        <a href="#" onclick="showPage('jobs')">Find Jobs</a>
+        <a href="#" onclick="showPage('profile')">My Profile</a>
+        <a href="#" onclick="showPage('resume')">Resume</a>
+        <a href="#" onclick="showPage('subscription')">Plans</a>
+        <a href="#" id="authLink" onclick="showPage('login')">Login</a>
+    </nav>
+</header>
+
+<main>
+    <!-- LOGIN -->
+    <section id="login" class="page">
+        <div class="auth-layout">
+            <div class="auth-side">
+                <span class="brand-icon">✦</span>
+                <h1>Your next chapter starts here.</h1>
+                <p>Discover opportunities, build your profile, and move closer to your dream career.</p>
+                <div class="auth-illustration">💼 🚀</div>
+            </div>
+
+            <div class="auth-card">
+                <h2>Welcome back!</h2>
+                <p>Sign in to continue your career journey.</p>
+
+                <form id="loginForm">
+                    <label>Email address</label>
+                    <input id="loginEmail" type="email"
+                           placeholder="you@example.com" required>
+
+                    <label>Password</label>
+                    <input id="loginPassword" type="password"
+                           placeholder="Enter your password"
+                           minlength="6" required>
+
+                    <button class="primary full" type="submit">Login</button>
+                </form>
+
+                <p id="loginMessage" class="message"></p>
+                <p class="center">New to CareerPilot?
+                    <a href="#" onclick="showPage('register')">Create account</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="register" class="page">
+        <div class="auth-card register-card">
+            <span class="brand-icon">✦</span>
+            <h2>Create your account</h2>
+            <p>Set up your account to start finding the right opportunities.</p>
+
+            <form id="registerForm">
+                <label>Full name</label>
+                <input id="regName" type="text"
+                       placeholder="Enter your full name" required>
+
+                <label>Email address</label>
+                <input id="regEmail" type="email"
+                       placeholder="you@example.com" required>
+
+                <label>Password</label>
+                <input id="regPassword" type="password"
+                       minlength="6" placeholder="At least 6 characters" required>
+
+                <label>Choose a subscription</label>
+                <select id="regPlan" required>
+                    <option value="Free">Free — ₹0/month</option>
+                    <option value="Pro">Pro — ₹299/month</option>
+                    <option value="Premium">Premium — ₹599/month</option>
+                </select>
+
+                <button class="primary full" type="submit">Register</button>
+            </form>
+
+            <p id="registerMessage" class="message"></p>
+            <p class="center">Already have an account?
+                <a href="#" onclick="showPage('login')">Login</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+        <div class="dashboard-hero">
+            <div>
+                <span class="eyebrow">YOUR CAREER, REIMAGINED</span>
+                <h1 id="welcomeTitle">Find work that works for you.</h1>
+                <p>Discover relevant jobs and take the next step in your career.</p>
+                <button class="primary" onclick="showPage('jobs')">
+                    Explore Jobs →
+                </button>
+                <button class="outline" onclick="showPage('profile')">
+                    Complete Profile
+                </button>
+            </div>
+            <div class="hero-art">👩‍💻<span>✦</span></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>🔎</span>
+                <p>Jobs Available</p>
+                <h2 id="jobCount">8</h2>
+            </div>
+            <div class="stat-card">
+                <span>📨</span>
+                <p>Applications</p>
+                <h2 id="applicationCount">0</h2>
+            </div>
+            <div class="stat-card">
+                <span>📄</span>
+                <p>Resume Status</p>
+                <h2 id="resumeStatus">Pending</h2>
+            </div>
+            <div class="stat-card">
+                <span>⭐</span>
+                <p>Subscription</p>
+                <h2 id="planStatus">Free</h2>
+            </div>
+        </div>
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">CURATED FOR YOU</span>
+                <h2>Recommended jobs</h2>
+            </div>
+            <a href="#" onclick="showPage('jobs')">View all jobs →</a>
+        </div>
+
+        <div id="recommendedJobs" class="job-grid"></div>
+
+        <div class="next-steps">
+            <h2>Move your career forward</h2>
+            <div class="steps-grid">
+                <button onclick="showPage('profile')">
+                    <span>01</span>
+                    <strong>Personal Details</strong>
+                    <small>Tell employers about yourself.</small>
+                </button>
+                <button onclick="showPage('resume')">
+                    <span>02</span>
+                    <strong>Upload Resume</strong>
+                    <small>Showcase your experience.</small>
+                </button>
+                <button onclick="showPage('subscription')">
+                    <span>03</span>
+                    <strong>Choose a Plan</strong>
+                    <small>Explore your subscription options.</small>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERSONAL DETAILS -->
+    <section id="profile" class="page">
+        <div class="page-heading">
+            <span class="eyebrow">YOUR CAREER IDENTITY</span>
+            <h1>Personal Details</h1>
+            <p>Build your profile to help match you with relevant opportunities.</p>
+        </div>
+
+        <div class="form-card">
+            <form id="profileForm">
+                <div class="form-grid">
+                    <div>
+                        <label>Full name</label>
+                        <input id="fullName" type="text" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label>Email address</label>
+                        <input id="profileEmail" type="email" required placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label>Phone number</label>
+                        <input id="phone" type="tel" required
+                               pattern="[0-9+() -]{7,20}" placeholder="+91 9876543210">
+                    </div>
+                    <div>
+                        <label>Location</label>
+                        <input id="location" type="text" placeholder="City, country">
+                    </div>
+                    <div>
+                        <label>Highest education</label>
+                        <select id="education">
+                            <option value="">Select education</option>
+                            <option>High School</option>
+                            <option>Diploma</option>
+                            <option>Bachelor's Degree</option>
+                            <option>Master's Degree</option>
+                            <option>Doctorate</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Experience</label>
+                        <select id="experience">
+                            <option value="">Select experience</option>
+                            <option>Fresher</option>
+                            <option>1–2 years</option>
+                            <option>3–5 years</option>
+                            <option>6–10 years</option>
+                            <option>10+ years</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Preferred job role</label>
+                        <input id="preferredRole" type="text"
+                               placeholder="e.g. Software Developer">
+                    </div>
+                    <div>
+                        <label>Expected salary (per year)</label>
+                        <input id="salary" type="number" min="0"
+                               placeholder="e.g. 600000">
+                    </div>
+                    <div class="wide">
+                        <label>Skills</label>
+                        <input id="skills" type="text"
+                               placeholder="Python, HTML, SQL, Communication">
+                    </div>
+                    <div class="wide">
+                        <label>Professional summary</label>
+                        <textarea id="summary" rows="4"
+                                  placeholder="Describe your experience, strengths and career goals..."></textarea>
+                    </div>
+                </div>
+
+                <button class="primary" type="submit">Save Personal Details</button>
+                <p id="profileMessage" class="message"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- RESUME UPLOAD -->
+    <section id="resume" class="page">
+        <div class="page-heading">
+            <span class="eyebrow">MAKE YOUR FIRST IMPRESSION COUNT</span>
+            <h1>Resume Upload</h1>
+            <p>Upload your resume so you can prepare for job applications.</p>
+        </div>
+
+        <div class="resume-card">
+            <div class="upload-icon">📄</div>
+            <h2>Upload your resume</h2>
+            <p>Accepted formats: PDF, DOC and DOCX. Maximum size: 5 MB.</p>
+
+            <label for="resumeFile" class="drop-zone">
+                <span>☁️</span>
+                <strong>Choose a file from your computer</strong>
+                <small>Click here to browse</small>
+            </label>
+
+            <input type="file" id="resumeFile"
+                   accept=".pdf,.doc,.docx" hidden>
+
+            <div id="fileDetails" class="file-details">
+                No file selected
+            </div>
+
+            <button id="uploadButton" class="primary" type="button" disabled>
+                Confirm Resume
+            </button>
+
+            <p id="resumeMessage" class="message"></p>
+
+            <div class="resume-tip">
+                <strong>💡 Resume tip</strong>
+                <p>Highlight relevant skills, projects, education and measurable achievements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBSCRIPTION -->
+    <section id="subscription" class="page">
+        <div class="page-heading">
+            <span class="eyebrow">INVEST IN YOUR NEXT CHAPTER</span>
+            <h1>Choose your plan</h1>
+            <p>Select the features that fit your job search.</p>
+        </div>
+
+        <div class="plans-grid">
+            <article class="plan-card">
+                <span class="plan-icon">🌱</span>
+                <h2>Free</h2>
+                <p>Get started with your job search.</p>
+                <div class="price">₹0 <small>/ month</small></div>
+                <ul>
+                    <li>✓ Browse job listings</li>
+                    <li>✓ Create your profile</li>
+                    <li>✓ Upload your resume</li>
+                    <li>✓ Track applications locally</li>
+                </ul>
+                <button class="outline full" onclick="choosePlan('Free')">
+                    Choose Free
+                </button>
+            </article>
+
+            <article class="plan-card popular">
+                <span class="popular-label">POPULAR</span>
+                <span class="plan-icon">🚀</span>
+                <h2>Pro</h2>
+                <p>For focused job seekers.</p>
+                <div class="price">₹299 <small>/ month</small></div>
+                <ul>
+                    <li>✓ Everything in Free</li>
+                    <li>✓ Demo job-match insights</li>
+                    <li>✓ Interview preparation tips</li>
+                    <li>✓ Career progress dashboard</li>
+                </ul>
+                <button class="primary full" onclick="choosePlan('Pro')">
+                    Choose Pro
+                </button>
+            </article>
+
+            <article class="plan-card">
+                <span class="plan-icon">💎</span>
+                <h2>Premium</h2>
+                <p>For a more guided experience.</p>
+                <div class="price">₹599 <small>/ month</small></div>
+                <ul>
+                    <li>✓ Everything in Pro</li>
+                    <li>✓ Advanced demo matching</li>
+                    <li>✓ Resume improvement checklist</li>
+                    <li>✓ Job-search planning tools</li>
+                </ul>
+                <button class="outline full" onclick="choosePlan('Premium')">
+                    Choose Premium
+                </button>
+            </article>
+        </div>
+
+        <p id="planMessage" class="message center"></p>
+        <p class="disclaimer">Demo subscriptions only. No real payment is processed.</p>
+    </section>
+
+    <!-- JOB SEARCH -->
+    <section id="jobs" class="page">
+        <div class="page-heading">
+            <span class="eyebrow">YOUR NEXT OPPORTUNITY</span>
+            <h1>Find your ideal job</h1>
+            <p>Search opportunities by role, location and employment type.</p>
+        </div>
+
+        <div class="job-search">
+            <input id="jobSearch" type="search"
+                   placeholder="Job title or skill..."
+                   oninput="renderJobs()">
+
+            <input id="jobLocation" type="search"
+                   placeholder="Location..."
+                   oninput="renderJobs()">
+
+            <select id="jobType" onchange="renderJobs()">
+                <option value="All">All job types</option>
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Internship</option>
+                <option>Remote</option>
+            </select>
+        </div>
+
+        <div class="job-result-heading">
+            <h2>Available opportunities</h2>
+            <span id="resultsCount"></span>
+        </div>
+
+        <div id="allJobs" class="job-grid"></div>
+        <p class="disclaimer">These are sample job listings for demonstration, not verified vacancies.</p>
+    </section>
+
+    <!-- JOB DETAILS -->
+    <section id="jobDetail" class="page">
+        <div class="detail-card">
+            <button class="outline" onclick="showPage('jobs')">← Back to jobs</button>
+            <div id="jobDetailContent"></div>
+        </div>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section id="applications" class="page">
+        <div class="page-heading">
+            <span class="eyebrow">YOUR CAREER PROGRESS</span>
+            <h1>My Applications</h1>
+            <p>Keep track of the sample jobs you have selected.</p>
+        </div>
+        <div id="applicationList" class="application-list"></div>
+    </section>
+</main>
+
+<footer>
+    <a href="#" class="logo" onclick="showPage('dashboard')">✦ CareerPilot</a>
+    <p>Your next opportunity starts with a single step.</p>
+    <p>© 2026 CareerPilot · Intelligent Job Assistant</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
